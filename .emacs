@@ -44,7 +44,7 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-t") 'ace-jump-mode)
 (define-key global-map (kbd "C-c j") 'ace-jump-line-mode)
 
 (defun zap-up-to-char (arg char)
@@ -55,13 +55,13 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 
   (interactive "p\ncZap up to char: ")
   (let ((direction (if (>= arg 0) 1 -1)))
-	(kill-region (point)
-				 (progn
-				   (forward-char direction)
-				   (unwind-protect
-					   (search-forward (char-to-string char) nil nil arg)
-					 (backward-char direction))
-				   (point)))))
+    (kill-region (point)
+                 (progn
+                   (forward-char direction)
+                   (unwind-protect
+                       (search-forward (char-to-string char) nil nil arg)
+                     (backward-char direction))
+                   (point)))))
 
 
 (global-set-key (kbd "s-a") 'align-regexp)
@@ -72,10 +72,10 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (global-set-key (kbd "C-%") 'replace-string)
 
 (fset 'nodejs-global-require
-	  [?\C-  ?\M-b ?\M-w ?v ?a ?r ?  ?\M-f ?  ?= ?  ?r ?e ?q ?u ?i ?r ?e ?\( ?\' ?\C-y ?\' ?\) ?\; tab])
+      [?\C-  ?\M-b ?\M-w ?v ?a ?r ?  ?\M-f ?  ?= ?  ?r ?e ?q ?u ?i ?r ?e ?\( ?\' ?\C-y ?\' ?\) ?\; tab])
 
 (fset 'nodejs-local-require
-	  [?\M-b ?\C-  ?\M-f ?\M-w ?\M-b ?v ?a ?r ?  ?\M-f ?  ?= ?  ?r ?e ?q ?u ?i ?r ?e ?\( ?\' ?. ?/ ?\C-y ?\' ?\) ?\; tab])
+      [?\M-b ?\C-  ?\M-f ?\M-w ?\M-b ?v ?a ?r ?  ?\M-f ?  ?= ?  ?r ?e ?q ?u ?i ?r ?e ?\( ?\' ?. ?/ ?\C-y ?\' ?\) ?\; tab])
 
 (fset 'freyja-gen-validation
    [?\C-x ?r ?m ?f ?r ?e ?y ?j ?a ?- ?d ?o ?c ?g ?e ?n ?1 ?0 ?1 ?7 ?6 ?4 return ?\C-e ?\C-  ?\M-b ?\M-w ?\C-r ?\{ ?\C-f ?\C-  ?\M-f ?\M-w ?\C-s ?\) ?  ?\{ ?\C-m return return tab ?i ?f ?  ?\( ?! ?\S-  ?V ?a ?l ?i ?d ?a ?t ?i ?o ?n ?. ?i ?s ?\C-y ?\( ?\C-y ?\M-y ?\) ?\) ?  ?\{ return tab return ?\} tab ?\C-x ?r ?b ?f ?r ?e ?y ?j ?a ?- ?d ?o ?c ?g ?e ?n ?1 ?0 ?1 ?7 ?6 ?4 return ?\M-x ?b ?o ?o ?k ?m ?a ?r ?k ?- ?d ?e ?l ?e ?t ?e return ?f ?r ?e ?y ?j ?a ?- ?d ?o ?c ?g ?e ?n ?1 ?0 ?1 ?7 ?6 ?4 return ?\C-p])
@@ -85,13 +85,13 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (global-set-key (kbd "s-r") 'nodejs-local-require)
 
 (add-hook 'after-init-hook (lambda()
-							 (require 'multiple-cursors)
-							 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-							 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-							 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-							 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-							 (projectile-global-mode)							 
-							 ))
+                             (require 'multiple-cursors)
+                             (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+                             (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+                             (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+                             (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+                             (projectile-global-mode)                            
+                             ))
 
 ; --------------------------- Global Module Section ---------------------------
 
@@ -142,7 +142,7 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (require 'autopair)
 
 (add-to-list 'load-path
-			 "~/.emacs.d/plugins/goflymake")
+             "~/.emacs.d/plugins/goflymake")
 (require 'go-flycheck)
 
 
@@ -185,7 +185,7 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (defadvice ido-set-matches-1 (around my-ido-set-matches-1 activate)
   (let ((ido-enable-flex-matching (< (* (length (ad-get-arg 0)) (length ido-text))
                                      af-ido-flex-fuzzy-limit)))
-	ad-do-it))
+    ad-do-it))
 
 ;; revert all buffers opened
 ;; this is good for when you do a git checkout
@@ -246,7 +246,7 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 ; --------------------------- TypeScript Section ---------------------------
 
 (add-to-list 'load-path
-			 "~/.emacs.d/plugins/typescript")
+             "~/.emacs.d/plugins/typescript")
 
 (require 'typescript)
 
@@ -271,25 +271,25 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (require 'js-comint)
 (setq inferior-js-program-command "/usr/bin/java org.mozilla.javascript.tools.shell.Main")
 (add-hook 'js2-mode-hook '(lambda ()
-			    (local-set-key "\C-x\C-e" 'js-send-last-sexp)
-			    (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
-			    (local-set-key "\C-cb" 'js-send-buffer)
-			    (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-			    (local-set-key "\C-cl" 'js-load-file-and-go)
-				(setq indent-tabs-mode nil)
-				; (whitespace-mode t)
+                (local-set-key "\C-x\C-e" 'js-send-last-sexp)
+                (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
+                (local-set-key "\C-cb" 'js-send-buffer)
+                (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
+                (local-set-key "\C-cl" 'js-load-file-and-go)
+                (setq indent-tabs-mode nil)
+                ; (whitespace-mode t)
 
-				;; smart tabs
-			    (smart-tabs-mode t)
-			    (smart-tabs-advice js2-indent-line js2-basic-offset)
-				(font-lock-add-keywords nil 
-										'(("\\<\\(FIXME\\|TODO\\|XXX+\\|BUG\\):" 
-										   1 font-lock-warning-face prepend)))
-				(c-set-offset 'case-label '+)
-				
-			    ))
+                ;; smart tabs
+                (smart-tabs-mode t)
+                (smart-tabs-advice js2-indent-line js2-basic-offset)
+                (font-lock-add-keywords nil 
+                                        '(("\\<\\(FIXME\\|TODO\\|XXX+\\|BUG\\):" 
+                                           1 font-lock-warning-face prepend)))
+                (c-set-offset 'case-label '+)
+                
+                ))
 
-; --------------------------- Golang Section ---------------------------		
+; --------------------------- Golang Section ---------------------------        
 
 (put 'dired-find-alternate-file 'disabled nil)
 
@@ -303,7 +303,7 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 ; --------------------------- C/C++ Section ---------------------------
 
 (setq c-default-style "linux"
-	  c-basic-offset 4)
+      c-basic-offset 4)
 ; --------------------------- Scala Section ---------------------------
 ; scala-mode was installed via package-list
 
@@ -326,13 +326,13 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 
 
 (add-hook 'after-init-hook (lambda()
-							 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))))
+                             (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))))
 (setq debug-on-error nil)
 
 (add-hook 'after-init-hook (lambda()
-							 (global-set-key "\M-n"  (lambda () (interactive) (scroll-up   2)) )
-							 (global-set-key "\M-p"  (lambda () (interactive) (scroll-down 2)) )
-							 ))
+                             (global-set-key "\M-n"  (lambda () (interactive) (scroll-up   2)) )
+                             (global-set-key "\M-p"  (lambda () (interactive) (scroll-down 2)) )
+                             ))
 
 (put 'upcase-region 'disabled nil)
 
