@@ -3,12 +3,14 @@
 
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
-(package-initialize)
-(add-to-list 'package-archives
-			 '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (global-set-key "\M-n"  (lambda () (interactive) (scroll-up   2)) )
 (global-set-key "\M-p"  (lambda () (interactive) (scroll-down 2)) )
+
+(require 'package)
+(add-to-list 'package-archives
+			 '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
 
 (add-to-list 'load-path
 	     "~/.emacs.d/use-package")
