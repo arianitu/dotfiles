@@ -80,6 +80,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export GOPATH="/Users/auka/Development/go"
 export PATH=/opt/homebrew-cask/Caskroom/emacs/24.5-1/Emacs.app/Contents/MacOS/bin:$PATH:$GOPATH/bin
+export PATH="/usr/local/sbin:$PATH"
 
 alias flash-log="tail -n 250 -f /Users/auka/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt"
 alias error-log="tail -n 250 -f /usr/local/Cellar/nginx/*/logs/error.log"
@@ -94,7 +95,6 @@ alias php-fpm.restart='php-fpm.stop && php-fpm.start'
 alias mysql.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
 alias mysql.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
 alias mysql.restart='mysql.stop && mysql.start'
-
 
 # list git branches by most recently modified
 alias glist='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
