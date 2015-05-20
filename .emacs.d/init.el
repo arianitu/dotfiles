@@ -63,6 +63,7 @@
   (setq helm-quick-update t
 		helm-autoresize-max-height 20
 		helm-autoresize-min-height 20
+		helm-split-window-in-side-p t
 		helm-idle-delay 0.01
 		helm-input-idle-delay 0.01)
   )
@@ -74,6 +75,7 @@
   :init
   (bind-key "M-m" 'projectile-commander)
   (setq projectile-completion-system 'helm)
+  (setq projectile-indexing-method 'alien)
   (projectile-global-mode))
 
 (use-package helm-projectile
