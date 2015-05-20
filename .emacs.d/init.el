@@ -73,7 +73,8 @@
   :commands projectile-commander
   :init
   (bind-key "M-m" 'projectile-commander)
-  (setq projectile-completion-system 'helm))
+  (setq projectile-completion-system 'helm)
+  (projectile-global-mode))
 
 (use-package helm-projectile
   :ensure t
