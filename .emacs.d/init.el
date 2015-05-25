@@ -39,6 +39,10 @@
   (global-undo-tree-mode 1)
   )
 
+(use-package json-mode
+  :ensure t
+  )
+
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 
@@ -64,6 +68,7 @@
 		helm-autoresize-max-height 20
 		helm-autoresize-min-height 20
 		helm-split-window-in-side-p t
+		helm-split-window-default-side 'below
 		helm-idle-delay 0.01
 		helm-input-idle-delay 0.01)
   )
@@ -128,6 +133,9 @@
 
 (use-package yaml-mode
   :ensure t) 
+
+(use-package php-mode
+  :ensure t)
 
 ;; Linum mode
 (global-linum-mode t)
