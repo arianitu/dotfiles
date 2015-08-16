@@ -12,6 +12,9 @@
 			 '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+(unless package-archive-contents
+  (package-refresh-contents))
+
 (add-to-list 'load-path
 	     "~/.emacs.d/use-package")
 (eval-when-compile
