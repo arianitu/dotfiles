@@ -81,10 +81,13 @@ source $ZSH/oh-my-zsh.sh
 export GOPATH="/Users/auka/Development/go"
 export PATH=/opt/homebrew-cask/Caskroom/emacs/24.5-1/Emacs.app/Contents/MacOS/bin:$PATH:$GOPATH/bin
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/gatling-2.2.0/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 alias flash-log="tail -n 250 -f /Users/auka/Library/Preferences/Macromedia/Flash\ Player/Logs/flashlog.txt"
 alias error-log="tail -n 250 -f /usr/local/Cellar/nginx/*/logs/error.log"
 alias access-log="tail -n 250 -f /usr/local/Cellar/nginx/*/logs/access.log"
+
 
 alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
 alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
@@ -95,6 +98,7 @@ alias php-fpm.restart='php-fpm.stop && php-fpm.start'
 alias mysql.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mariadb.plist"
 alias mysql.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mariadb.plist"
 alias mysql.restart='mysql.stop && mysql.start'
+
 
 # list git branches by most recently modified
 alias glist='for ref in $(git for-each-ref --sort=-committerdate --format="%(refname)" refs/heads/ refs/remotes ); do git log -n1 $ref --pretty=format:"%Cgreen%cr%Creset %C(yellow)%d%Creset %C(bold blue)<%an>%Creset%n" | cat ; done | awk '"'! a["'$0'"]++'"
@@ -118,3 +122,9 @@ function scd()
 }
 
 . `brew --prefix`/etc/profile.d/z.sh
+
+ulimit -n 65536
+ulimit -u 2048
+eval "$(docker-machine env default)"
+alias dockviz="docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock nate/dockviz"
+

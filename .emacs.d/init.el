@@ -1,6 +1,7 @@
 (setq user-full-name "Arianit Uka")
 (setq user-mail-address "arianitu@gmail.com")
 
+(split-window-horizontally)
 (setq mac-command-modifier 'meta)
 (setq mac-option-modifier 'super)
 
@@ -64,12 +65,15 @@
   (helm-autoresize-mode 1)
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-M-i") 'helm-select-action)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (setq helm-quick-update t
 		helm-autoresize-max-height 20
 		helm-autoresize-min-height 20
 		helm-split-window-in-side-p t
 		helm-split-window-default-side 'below
 		helm-idle-delay 0.01
+		helm-candidate-number-limit 50
+		projectile-enable-caching t
 		helm-input-idle-delay 0.01)
   )
 
@@ -98,8 +102,8 @@
   :mode ("\\.js$" . js2-mode)
   :config
   (progn (require 'js2-imenu-extras) (js2-imenu-extras-setup))
-  (add-hook 'js2-mode-hook '(lambda ()
-			      (setq indent-tabs-mode nil)
+  (add-hook 'js2-mode-hook '(setq ()
+			      (lambdas indent-tabs-mode nil)
 			      (font-lock-add-keywords nil 
 						      '(("\\<\\(FIXME\\|TODO\\|XXX+\\|BUG\\):" 
 							 1 font-lock-warning-face prepend)))
@@ -113,6 +117,8 @@
          ("\\.erb\\'" . web-mode) ("\\.html\\'" . web-mode)
          ("\\.rhtml\\'" . web-mode) ("\\.mustache\\'" . web-mode)
          ("\\.jsx\\'" . web-mode))
+  :init
+  (setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
   )
 
 (use-package auto-complete
@@ -289,6 +295,21 @@ Equivalent to \\[set-mark-command] when \\[transient-mark-mode] is disabled"
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
+ ;; Your init file should contain only 
  ;; If there is more than one, they won't work right.
  )
+
+(defvar auka-point-stack nil "Points
+                auka/save-point and auka/jump-point use")  (defun
+                auka/save-point () (interactive) (setq
+                auka-point-stack (cons (point) auka-point-stack)))
+                (defun auka/jump-point () (interactive) (goto-char
+                (prog1 (car auka-point-stack) (setq
+											   auka-point-stack (cdr auka-point-stack)))))
+					   
+(global-set-key (kbd "C-q") 'auka/save-point)
+(global-set-key (kbd "M-q") 'auka/jump-point)
+
+
+
+
